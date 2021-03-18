@@ -1,5 +1,5 @@
 AWSTemplateFormatVersion: "2010-09-09"
-Description: "(SA0002) - sagemaker-graph-fraud-detection SageMaker stack"
+Description: "(SA0002) - sagemaker-german-risk-classification SageMaker stack"
 Parameters:
   SolutionPrefix:
     Description: Enter the name of the prefix for the solution used for naming
@@ -26,7 +26,7 @@ Parameters:
   SageMakerProcessingJobContainerName:
     Description: Name of the SageMaker processing job ECR Container
     Type: String
-    Default:  "sagemaker-soln-graph-fraud-preprocessing"
+    Default:  "sagemaker-soln-graph-german-risk-preprocessing" 
   SageMakerProcessingJobContainerCodeBuild:
     Description: Name of the SageMaker processing container code build project
     Type: String
@@ -47,7 +47,7 @@ Mappings:
       BucketPrefix: "sagemaker-solutions-build"
   SageMaker:
     Source:
-      S3Key: "Fraud-detection-in-financial-networks/source/sagemaker/"
+      S3Key: "German-risk/source/sagemaker/"
 
 Resources:
   NotebookInstance:
@@ -96,4 +96,4 @@ Outputs:
     Value: !Sub "https://console.aws.amazon.com/sagemaker/home?region=${AWS::Region}#/notebook-instances/openNotebook/${SolutionPrefix}-notebook-instance?view=classic"
   NotebookInstance:
     Description: "SageMaker Notebook instance to manually orchestrate data preprocessing and model training"
-    Value: !Sub "https://${SolutionPrefix}-notebook-instance.notebook.${AWS::Region}.sagemaker.aws/notebooks/dgl-fraud-detection.ipynb"
+    Value: !Sub "https://${SolutionPrefix}-notebook-instance.notebook.${AWS::Region}.sagemaker.aws/notebooks/dgl-german-risk.ipynb"

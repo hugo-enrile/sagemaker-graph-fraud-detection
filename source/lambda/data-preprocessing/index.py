@@ -61,7 +61,7 @@ def prepare_preprocessing_output(event_source_s3, timestamp, s3_bucket=S3_BUCKET
     return get_full_s3_path(s3_bucket, os.path.join(output_prefix, timestamp))
 
 
-def verify(files, s3_bucket=S3_BUCKET, data_prefix=DATA_PREFIX, expected_files=['transaction.csv', 'identity.csv']):
+def verify(files, s3_bucket=S3_BUCKET, data_prefix=DATA_PREFIX, expected_files=['german-transaction.csv', 'german-identity.csv']):
     if not all([file in list(map(os.path.basename, files)) for file in expected_files]):
         raise Exception("Raw data absent or incomplete in {}".format(get_full_s3_path(
             s3_bucket, data_prefix)))
@@ -92,7 +92,7 @@ def run_preprocessing_job(input,
     ecr_repository_uri = '{}.dkr.ecr.{}.amazonaws.com/{}:latest'.format(account_id, region, image_uri)
 
     # upload code
-    code_file = 'data-preprocessing/graph_data_preprocessor.py'
+    code_file = 'data-preprocessing/graph_data_preprocessor_german_risk.py'
     code_file_s3_key = os.path.join(input_prefix, timestamp, code_file)
     s3_client.upload_file(code_file, s3_bucket, code_file_s3_key)
 
@@ -102,8 +102,7 @@ def run_preprocessing_job(input,
     app_spec = {
         'ImageUri': ecr_repository_uri,
         'ContainerEntrypoint': entrypoint,
-        'ContainerArguments': ['--id-cols', 'card1,card2,card3,card4,card5,card6,ProductCD,addr1,addr2,P_emaildomain,R_emaildomain',
-                                '--cat-cols','M1,M2,M3,M4,M5,M6,M7,M8,M9']
+        'ContainerArguments': ['--cat-cols','Purpose']
     }
 
     processing_inputs = [
@@ -133,7 +132,7 @@ def run_preprocessing_job(input,
                                                    'S3UploadMode': 'EndOfJob'}
                                       }]}
 
-    processing_job_name = "sagemaker-graph-fraud-data-processing-{}".format(timestamp)
+    processing_job_name = "sagemaker-graph-german-risk-data-processing-{}".format(timestamp)
     resources = {
         'ClusterConfig': {
             'InstanceCount': 1,

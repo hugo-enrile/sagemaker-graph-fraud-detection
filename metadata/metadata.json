@@ -1,16 +1,16 @@
 {
-    "id": "sagemaker-soln-gfd",
-    "name": "Amazon SageMaker and Deep Graph Library for Fraud Detection in Heterogeneous Graphs",
-    "shortName": "Graph Fraud Detection",
+    "id": "sagemaker-soln-grc",
+    "name": "Amazon SageMaker and Deep Graph Library for Risk Classification in Heterogeneous Graphs",
+    "shortName": "Graph Risk Classification",
     "priority": 0,
-    "desc": "Many online businesses lose billions annually to fraud, but machine learning based fraud detection models can help businesses predict what interactions or users are likely fraudulent and save them from incurring those costs. In this project, we formulate the problem of fraud detection as a classification task on a heterogeneous interaction network. The machine learning model is a Graph Neural Network (GNN) that learns latent representations of users or transactions which can then be easily separated into fraud or legitimate.",
-    "meta": "fraud classification detection graph gnn network interaction",
-    "tags": ["financial services", "fraud detection", "internet retail"],
+    "desc": "Allow to classify between different risks associated to a given loan",
+    "meta": "risk classification graph gnn network interaction",
+    "tags": ["financial services", "risk classification", "internet retail"],
     "parameters": [
         {
             "name": "SolutionPrefix",
             "type": "text",
-            "default": "sagemaker-soln-graph-fraud"
+            "default": "sagemaker-soln-graph-risk"
         },
         {
             "name": "IamRole",
@@ -50,7 +50,7 @@
         {
             "name": "SageMakerProcessingJobContainerName",
             "type": "text",
-            "default": "sagemaker-soln-graph-fraud-preprocessing"
+            "default": "sagemaker-soln-graph-german-risk-preprocessing"
         },
         {
             "name": "SageMakerProcessingJobInstanceType",
@@ -74,13 +74,13 @@
         }
     ],
     "acknowledgements": ["CAPABILITY_IAM","CAPABILITY_NAMED_IAM"],
-    "cloudFormationTemplate": "s3-us-east-2.amazonaws.com/sagemaker-solutions-build-us-east-2/Fraud-detection-in-financial-networks/deployment/sagemaker-graph-fraud-detection.yaml",
+    "cloudFormationTemplate": "s3-us-east-2.amazonaws.com/sagemaker-solutions-build-us-east-2/German-risk/deployment/sagemaker-graph-german-risk.yaml",
     "serviceCatalogProduct": "TBD",
     "copyS3Source": "sagemaker-solutions-build-us-east-2",
-    "copyS3SourcePrefix": "Fraud-detection-in-financial-networks/source/sagemaker",
-    "notebooksDirectory": "Fraud-detection-in-financial-networks/source/sagemaker",
+    "copyS3SourcePrefix": "German-risk/source/sagemaker",
+    "notebooksDirectory": "German-risk/source/sagemaker",
     "notebookPaths": [
-        "Fraud-detection-in-financial-networks/source/sagemaker/dgl-fraud-detection.ipynb"
+        "German-risk/source/sagemaker/dgl-fraud-detection.ipynb"
     ],
     "permissions": "TBD"
  }

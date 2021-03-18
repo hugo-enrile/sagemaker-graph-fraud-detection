@@ -1,10 +1,10 @@
 AWSTemplateFormatVersion: "2010-09-09"
-Description: "(SA0002) - sagemaker-graph-fraud-detection SageMaker permissions stack"
+Description: "(SA0002) - sagemaker-german-risk-classification SageMaker permissions stack"
 Parameters:
   SolutionPrefix:
     Description: Enter the name of the prefix for the solution used for naming
     Type: String
-    Default: "sagemaker-soln-graph-fraud-detection"
+    Default: "sagemaker-soln-graph-german-risk"
   SolutionS3BucketName:
     Description: Enter the name of the S3 bucket for the solution
     Type: String

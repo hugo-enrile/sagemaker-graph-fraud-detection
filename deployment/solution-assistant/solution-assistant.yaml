@@ -19,7 +19,7 @@ Parameters:
 Mappings:
   Function:
     SolutionAssistant:
-      S3Key: "Fraud-detection-in-financial-networks/build/solution_assistant.zip"
+      S3Key: "German-risk/build/solution_assistant.zip"
 Resources:
   SolutionAssistant:
     Type: "Custom::SolutionAssistant"
