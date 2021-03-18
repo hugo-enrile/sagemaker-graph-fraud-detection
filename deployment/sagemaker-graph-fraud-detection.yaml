@@ -1,9 +1,9 @@
 AWSTemplateFormatVersion: "2010-09-09"
-Description: "(SA0002) - sagemaker-graph-fraud-detection: Solution for training a graph neural network model for fraud detection using Amazon SageMaker. Version 1"
+Description: "sagemaker-german-risk-classification: Solution for training a graph neural network model for risk classification using Amazon SageMaker. Version 1"
 Parameters:
   SolutionPrefix:
     Type: String
-    Default: "sagemaker-soln-graph-fraud"
+    Default: "sagemaker-soln-graph-german-risk"
     Description: |
       Used to name resources created as part of this stack (and inside nested stacks too).
       Can be the same as the stack name used by AWS CloudFormation, but this field has extra
@@ -58,7 +58,7 @@ Parameters:
   SageMakerProcessingJobContainerName:
     Description: Name of the SageMaker processing job ECR Container
     Type: String
-    Default:  "sagemaker-soln-graph-fraud-preprocessing"
+    Default:  "sagemaker-soln-graph-german-risk-preprocessing"
   SageMakerProcessingJobInstanceType:
     Description: Instance type of the SageMaker processing job
     Type: String
@@ -146,12 +146,12 @@ Mappings:
       BucketPrefix: "sagemaker-solutions-build"
   Lambda:
     DataPreprocessing:
-      S3Key: "Fraud-detection-in-financial-networks/build/data_preprocessing.zip"
+      S3Key: "Risk-classification/build/data_preprocessing.zip"
     GraphModelling:
-      S3Key: "Fraud-detection-in-financial-networks/build/graph_modelling.zip"
+      S3Key: "Risk-classification/build/graph_modelling.zip"
   CodeBuild:
     ProcessingContainer:
-      S3Key: "Fraud-detection-in-financial-networks/build/sagemaker_data_preprocessing.zip"
+      S3Key: "Risk-classification/build/sagemaker_data_preprocessing.zip"
 
 Conditions:
   CreateClassicSageMakerResources: !Equals [ !Ref CreateSageMakerNotebookInstance, "true" ]
@@ -204,7 +204,7 @@ Resources:
     Type: "AWS::CloudFormation::Stack"
     Properties:
       TemplateURL: !Sub
-        - "https://s3.amazonaws.com/${SolutionRefBucketBase}-${Region}/Fraud-detection-in-financial-networks/deployment/solution-assistant/solution-assistant.yaml"
+        - "https://s3.amazonaws.com/${SolutionRefBucketBase}-${Region}/Risk-classification/deployment/solution-assistant/solution-assistant.yaml"
         - SolutionRefBucketBase: !FindInMap [S3, !Ref StackVersion, BucketPrefix]
           Region: !Ref AWS::Region
       Parameters:
@@ -221,7 +221,7 @@ Resources:
     Condition: CreateCustomSolutionRole
     Properties:
       TemplateURL: !Sub
-      - "https://s3.amazonaws.com/${SolutionRefBucketBase}-${Region}/Fraud-detection-in-financial-networks/deployment/sagemaker-permissions-stack.yaml"
+      - "https://s3.amazonaws.com/${SolutionRefBucketBase}-${Region}/Risk-classification/deployment/sagemaker-permissions-stack.yaml"
       - SolutionRefBucketBase: !FindInMap [S3, !Ref StackVersion, BucketPrefix]
         Region: !Ref AWS::Region
       Parameters:
@@ -234,7 +234,7 @@ Resources:
     Condition: CreateClassicSageMakerResources
     Properties:
       TemplateURL: !Sub
-      - "https://s3.amazonaws.com/${SolutionRefBucketBase}-${Region}/Fraud-detection-in-financial-networks/deployment/sagemaker-notebook-instance-stack.yaml"
+      - "https://s3.amazonaws.com/${SolutionRefBucketBase}-${Region}/Risk-classification/deployment/sagemaker-notebook-instance-stack.yaml"
       - SolutionRefBucketBase: !FindInMap [S3, !Ref StackVersion, BucketPrefix]
         Region: !Ref AWS::Region
       Parameters:
